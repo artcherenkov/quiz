@@ -4,9 +4,9 @@ import { BrowserRouter } from "react-router-dom";
 
 import App from "./components/App";
 
-import "./index.css";
-import "./vendor/fonts.css";
 import "./vendor/normalize.css";
+import "./vendor/fonts.css";
+import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>
