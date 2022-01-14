@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+export const Root = styled.div`
+  align-self: center;
+  padding-right: 30px;
+  padding-left: 18px;
+  display: flex;
+`;
 export const Status = styled.p`
   font-weight: 500;
   font-size: 14px;
@@ -11,6 +17,10 @@ export const Bar = styled.div`
   padding: 3px;
   background-color: #6bc2ff;
   border-radius: 3px;
+`;
+export const ProgressContainer = styled.div`
+  margin-left: 10px;
+  flex-grow: 1;
 `;
 export const Progress = styled.div`
   height: 18px;

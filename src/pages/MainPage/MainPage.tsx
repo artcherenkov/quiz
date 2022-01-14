@@ -1,10 +1,9 @@
-import { useNavigate } from "react-router-dom";
 import * as Styled from "./MainPage.styled";
+import { useHistory } from "react-router";
 
 const MainPage = () => {
-  const navigate = useNavigate();
-
-  const onSubmit = () => navigate("/quiz");
+  const history = useHistory();
+  const onSubmit = () => history.replace("/quiz/1");
 
   return (
     <Styled.Root>

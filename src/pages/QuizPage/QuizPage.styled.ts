@@ -1,23 +1,11 @@
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import OriginalProgressBar from "../../components/ProgressBar/ProgressBar";
 
 export const Root = styled.section`
   height: 100%;
   padding: 30px 0;
   display: grid;
   grid-template-rows: auto 1fr auto;
-`;
-
-export const ProgressBar = styled(OriginalProgressBar)`
-  flex-grow: 1;
-  margin-left: 10px;
-`;
-
-export const ProgressContainer = styled.div`
-  padding-right: 30px;
-  padding-left: 18px;
-  display: flex;
 `;
 
 export const ControlsContainer = styled.div`
