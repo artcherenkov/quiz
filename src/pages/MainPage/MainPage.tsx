@@ -1,9 +1,13 @@
 import * as Styled from "./MainPage.styled";
 import { useHistory } from "react-router";
+import { useAppSelector } from "../../store/hooks";
+import { selectQuestions } from "../../store/slices/quiz";
 
 const MainPage = () => {
   const history = useHistory();
-  const onSubmit = () => history.replace("/quiz/1");
+  const firstQuestion = useAppSelector(selectQuestions)[0];
+
+  const onSubmit = () => history.replace(`/quiz/${firstQuestion.id}`);
 
   return (
     <Styled.Root>
