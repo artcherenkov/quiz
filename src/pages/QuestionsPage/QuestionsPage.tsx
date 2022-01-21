@@ -1,3 +1,5 @@
+import { Redirect, useHistory } from "react-router";
+import Button from "@mui/material/Button";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
 
 import * as Styled from "./QuestionsPage.styled";
@@ -8,10 +10,10 @@ import {
   selectAnswers,
   resetQuiz,
 } from "../../store/slices/quiz";
-import { Redirect } from "react-router";
 
 const QuestionsPage = () => {
   const dispatch = useAppDispatch();
+  const history = useHistory();
   const questions = useAppSelector(selectQuestions);
   const answers = useAppSelector(selectAnswers);
   const activeQuestion = useAppSelector(selectActiveQuestion);
@@ -43,9 +45,17 @@ const QuestionsPage = () => {
           <Styled.Link to={`/quiz/${activeQuestion.id}`}>
             &larr; Назад к {activeQuestion.idx + 1} вопросу
           </Styled.Link>
-          <Styled.WarningLink to="/" onClick={() => dispatch(resetQuiz())}>
+          <Button
+            variant="outlined"
+            size="small"
+            color="error"
+            onClick={() => {
+              dispatch(resetQuiz());
+              history.push("/");
+            }}
+          >
             Сбросить
-          </Styled.WarningLink>
+          </Button>
         </Styled.LinksContainer>
       )}
       <Styled.QuestionsList>

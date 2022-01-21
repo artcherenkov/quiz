@@ -87,7 +87,6 @@ export const RAW_QUESTIONS: TRawQuestion[] = [
     options: ["Роман Власов", "Александр Карелин", "Алексей Мишин"],
     correctAnswer: "Александр Карелин",
   },
-  //
   {
     type: "single",
     title:

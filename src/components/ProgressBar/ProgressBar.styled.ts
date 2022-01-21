@@ -8,23 +8,23 @@ export const Root = styled.div`
 `;
 export const Status = styled.p`
   font-weight: 500;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 100%;
   margin-bottom: 8px;
   color: #454545;
 `;
 export const Bar = styled.div`
   padding: 3px;
-  background-color: #6bc2ff;
-  border-radius: 3px;
+  background-color: #d6eeff;
+  border-radius: 4px;
 `;
 export const ProgressContainer = styled.div`
   margin-left: 10px;
   flex-grow: 1;
 `;
 export const Progress = styled.div<{ percent?: number }>`
-  height: 18px;
-  background-color: #b4d6ee;
+  height: 6px;
+  background-color: #70c6ff;
   border-radius: 2px;
   width: ${(props) => props.percent}%;
   transition: width 200ms ease-in;

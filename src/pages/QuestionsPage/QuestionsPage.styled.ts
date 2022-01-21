@@ -63,11 +63,5 @@ export const LinksContainer = styled.div`
 export const Link = styled(RouterLink)`
   display: block;
   text-decoration: none;
-  margin-top: 12px;
   color: #2e3cff;
-`;
-
-export const WarningLink = styled(Link)`
-  font-size: 14px;
-  color: #da3e52;
 `;
