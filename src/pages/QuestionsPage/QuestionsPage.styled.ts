@@ -40,11 +40,11 @@ export const QuestionContainer = styled(RouterLink)<{
     switch (props.status) {
       case "fail":
         return css`
-          background-color: #d6f5e1;
+          background-color: #f7d4d9;
         `;
       case "success":
         return css`
-          background-color: #f7d4d9;
+          background-color: #d6f5e1;
         `;
     }
   }}

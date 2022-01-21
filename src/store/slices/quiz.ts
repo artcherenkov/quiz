@@ -1,16 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { TQuestion, TAnswer } from "../../types";
+import { stat } from "fs";
 
 interface IQuizState {
   questions: TQuestion[];
   currentQuestionId: string | undefined;
+  currentQuestionIdx: number;
   answers: TAnswer[];
 }
 
 const initialState: IQuizState = {
   questions: [],
   currentQuestionId: undefined,
+  currentQuestionIdx: -1,
   answers: [],
 };
 
@@ -21,8 +24,11 @@ export const quiz = createSlice({
     setQuestions: (state, action: PayloadAction<TQuestion[]>) => {
       state.questions = action.payload;
     },
-    setCurrentQuestion: (state, action: PayloadAction<string>) => {
+    setActiveQuestion: (state, action: PayloadAction<string>) => {
       state.currentQuestionId = action.payload;
+      state.currentQuestionIdx = state.questions.findIndex(
+        (q) => q.id === action.payload
+      );
     },
     resetCurrentQuestion: (state) => {
       state.currentQuestionId = undefined;
@@ -44,16 +50,36 @@ export const quiz = createSlice({
 export const selectQuestions = (state: RootState) => {
   return state.quiz.questions;
 };
-export const selectNextQuestionId =
-  (questionId: string) => (state: RootState) => {
-    return state.quiz.questions.findIndex((q) => q.id === questionId);
-  };
 export const selectQuestionById =
   (questionId: string) => (state: RootState) => {
     return state.quiz.questions.find((q) => q.id === questionId);
   };
+export const selectActiveQuestion = (state: RootState) => {
+  return {
+    id: state.quiz.currentQuestionId,
+    idx: state.quiz.currentQuestionIdx,
+  };
+};
+export const selectProgress = (state: RootState) => {
+  if (!state.quiz.answers.length) return 0;
+
+  return Math.floor(
+    (state.quiz.answers.length / state.quiz.questions.length) * 100
+  );
+};
+export const selectAnswers = (state: RootState) => {
+  return state.quiz.answers;
+};
+export const selectNextQuestionIdx = (state: RootState) => {
+  const nextQuestion = state.quiz.questions[state.quiz.currentQuestionIdx + 1];
+  if (!nextQuestion) {
+    return undefined;
+  }
+
+  return nextQuestion.id;
+};
 
 const { actions, reducer } = quiz;
-export const { setQuestions, setAnswer } = actions;
+export const { setQuestions, setAnswer, setActiveQuestion } = actions;
 
 export default reducer;

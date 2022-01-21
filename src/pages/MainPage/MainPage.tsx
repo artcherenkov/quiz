@@ -7,7 +7,9 @@ const MainPage = () => {
   const history = useHistory();
   const firstQuestion = useAppSelector(selectQuestions)[0];
 
-  const onSubmit = () => history.replace(`/quiz/${firstQuestion.id}`);
+  const onSubmit = () => {
+    history.replace(`/quiz/${firstQuestion.id}`);
+  };
 
   return (
     <Styled.Root>

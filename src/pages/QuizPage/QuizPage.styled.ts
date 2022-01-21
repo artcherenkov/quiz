@@ -4,8 +4,8 @@ import Button from "@mui/material/Button";
 export const Root = styled.section`
   height: 100%;
   padding: 30px 0;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+  //display: grid;
+  //grid-template-rows: auto 1fr auto;
 `;
 
 export const ControlsContainer = styled.div`

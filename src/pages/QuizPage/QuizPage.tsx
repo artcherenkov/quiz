@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as Styled from "./QuizPage.styled";
 
 import FormControl from "@mui/material/FormControl";
@@ -6,17 +6,42 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
-import { selectQuestionById } from "../../store/slices/quiz";
-import { useParams } from "react-router";
+import {
+  selectQuestionById,
+  setActiveQuestion,
+  selectQuestions,
+  selectAnswers,
+  selectNextQuestionIdx,
+} from "../../store/slices/quiz";
+import { useParams, useHistory } from "react-router";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { setAnswer as setAnswerAction } from "../../store/slices/quiz";
 
 const QuizPage = () => {
   const dispatch = useAppDispatch();
+  const history = useHistory();
   const { id } = useParams<{ id: string }>();
+
   const activeQuestion = useAppSelector(selectQuestionById(id));
+  const answers = useAppSelector(selectAnswers);
+  const nextQuestionIdx = useAppSelector(selectNextQuestionIdx);
 
   const [answer, setAnswer] = useState("");
+
+  const getGiverAnswer = () => {
+    const foundAnswer = answers.find((ans) => ans.questionId === id);
+
+    if (!foundAnswer) {
+      return "";
+    }
+
+    return foundAnswer.answer.value;
+  };
+
+  useEffect(() => {
+    dispatch(setActiveQuestion(id));
+    setAnswer(getGiverAnswer);
+  }, [id]);
 
   if (!activeQuestion) return null;
 
@@ -30,6 +55,10 @@ const QuizPage = () => {
     const isCorrect = activeQuestion.correctAnswerId === givenAnswer.id;
     const questionId = activeQuestion.id;
     dispatch(setAnswerAction({ questionId, answer: givenAnswer, isCorrect }));
+    if (nextQuestionIdx === undefined) {
+      return history.push(`/questions`);
+    }
+    history.push(`/quiz/${nextQuestionIdx}`);
   };
 
   return (
@@ -46,6 +75,7 @@ const QuizPage = () => {
           >
             {activeQuestion.options.map((option) => (
               <FormControlLabel
+                key={option.id}
                 value={option.value}
                 sx={{
                   "& .MuiFormControlLabel-label": {

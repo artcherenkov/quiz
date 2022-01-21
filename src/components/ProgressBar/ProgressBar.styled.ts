@@ -22,9 +22,10 @@ export const ProgressContainer = styled.div`
   margin-left: 10px;
   flex-grow: 1;
 `;
-export const Progress = styled.div`
+export const Progress = styled.div<{ percent?: number }>`
   height: 18px;
   background-color: #96e6b3;
   border-radius: 2px;
-  width: 25%;
+  width: ${(props) => props.percent}%;
+  transition: width 200ms ease-in;
 `;
