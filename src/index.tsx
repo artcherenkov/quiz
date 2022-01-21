@@ -8,7 +8,6 @@ import { store } from "./store/store";
 import { setQuestions } from "./store/slices/quiz";
 import { questions } from "./data";
 import { shuffle } from "./utils";
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 import "./vendor/normalize.css";
 import "./vendor/fonts.css";
@@ -26,5 +25,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
-
-serviceWorkerRegistration.register();
