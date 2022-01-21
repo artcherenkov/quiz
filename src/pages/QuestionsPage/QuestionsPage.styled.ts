@@ -53,10 +53,21 @@ export const QuestionContainer = styled(RouterLink)<{
     transform: scale(0.95);
   }
 `;
+export const LinksContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  padding: 12px 30px 0;
+  align-items: center;
+`;
 export const Link = styled(RouterLink)`
   display: block;
   text-decoration: none;
-  margin-left: 30px;
   margin-top: 12px;
   color: #2e3cff;
+`;
+
+export const WarningLink = styled(Link)`
+  font-size: 14px;
+  color: #da3e52;
 `;

@@ -1,17 +1,24 @@
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
 
 import * as Styled from "./QuestionsPage.styled";
-import { useAppSelector } from "../../store/hooks";
+import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import {
   selectQuestions,
   selectActiveQuestion,
   selectAnswers,
+  resetQuiz,
 } from "../../store/slices/quiz";
+import { Redirect } from "react-router";
 
 const QuestionsPage = () => {
+  const dispatch = useAppDispatch();
   const questions = useAppSelector(selectQuestions);
   const answers = useAppSelector(selectAnswers);
   const activeQuestion = useAppSelector(selectActiveQuestion);
+
+  if (activeQuestion.idx === -1) {
+    return <Redirect to="/" />;
+  }
 
   if (!questions) {
     return null;
@@ -32,9 +39,14 @@ const QuestionsPage = () => {
     <Styled.Root>
       <ProgressBar showStatus={false} showBurger={false} />
       {activeQuestion.idx !== -1 && (
-        <Styled.Link to={`/quiz/${activeQuestion.id}`}>
-          &larr; Назад к {activeQuestion.idx + 1} вопросу
-        </Styled.Link>
+        <Styled.LinksContainer>
+          <Styled.Link to={`/quiz/${activeQuestion.id}`}>
+            &larr; Назад к {activeQuestion.idx + 1} вопросу
+          </Styled.Link>
+          <Styled.WarningLink to="/" onClick={() => dispatch(resetQuiz())}>
+            Сбросить
+          </Styled.WarningLink>
+        </Styled.LinksContainer>
       )}
       <Styled.QuestionsList>
         {questions.map((q, idx) => {

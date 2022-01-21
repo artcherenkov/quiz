@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { TQuestion, TAnswer } from "../../types";
-import { stat } from "fs";
+import { shuffle } from "../../utils";
+import { questions } from "../../data";
 
 interface IQuizState {
   questions: TQuestion[];
@@ -16,6 +17,11 @@ const initialState: IQuizState = {
   currentQuestionIdx: -1,
   answers: [],
 };
+
+const getNewInitialState = (): IQuizState => ({
+  ...initialState,
+  questions: shuffle(questions.slice()),
+});
 
 export const quiz = createSlice({
   name: "quiz",
@@ -43,6 +49,9 @@ export const quiz = createSlice({
       }
 
       state.answers = [...state.answers, action.payload];
+    },
+    resetQuiz: () => {
+      return getNewInitialState();
     },
   },
 });
@@ -80,6 +89,7 @@ export const selectNextQuestionIdx = (state: RootState) => {
 };
 
 const { actions, reducer } = quiz;
-export const { setQuestions, setAnswer, setActiveQuestion } = actions;
+export const { setQuestions, setAnswer, setActiveQuestion, resetQuiz } =
+  actions;
 
 export default reducer;

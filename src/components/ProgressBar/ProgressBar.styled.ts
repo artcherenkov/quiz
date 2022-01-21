@@ -24,7 +24,7 @@ export const ProgressContainer = styled.div`
 `;
 export const Progress = styled.div<{ percent?: number }>`
   height: 18px;
-  background-color: #96e6b3;
+  background-color: #b4d6ee;
   border-radius: 2px;
   width: ${(props) => props.percent}%;
   transition: width 200ms ease-in;

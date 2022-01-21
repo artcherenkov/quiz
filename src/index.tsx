@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import App from "./components/App";
 import { store } from "./store/store";
 import { setQuestions } from "./store/slices/quiz";
-import { RAW_QUESTIONS, transformQuestions } from "./data";
+import { questions } from "./data";
 import { shuffle } from "./utils";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
@@ -14,7 +14,6 @@ import "./vendor/normalize.css";
 import "./vendor/fonts.css";
 import "./index.css";
 
-const questions = transformQuestions(RAW_QUESTIONS);
 store.dispatch(setQuestions(shuffle(questions)));
 
 ReactDOM.render(

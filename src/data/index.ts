@@ -155,3 +155,5 @@ export const transformQuestions = (
     };
   });
 };
+
+export const questions = transformQuestions(RAW_QUESTIONS);
