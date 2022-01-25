@@ -3,8 +3,6 @@ import * as Styled from "./QuizPage.styled";
 
 import FormControl from "@mui/material/FormControl";
 import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Radio from "@mui/material/Radio";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import {
   selectQuestionById,
@@ -15,6 +13,7 @@ import {
 import { useParams, useHistory } from "react-router";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { setAnswer as setAnswerAction } from "../../store/slices/quiz";
+import SingleOption from "./components/SingleOption/SingleOption";
 
 const QuizPage = () => {
   const dispatch = useAppDispatch();
@@ -73,27 +72,7 @@ const QuizPage = () => {
             onChange={onChange}
           >
             {activeQuestion.options.map((option) => (
-              <FormControlLabel
-                key={option.id}
-                value={option.value}
-                sx={{
-                  "& .MuiFormControlLabel-label": {
-                    fontSize: 20,
-                    color: "#2d2d2d",
-                  },
-                }}
-                control={
-                  <Radio
-                    sx={{
-                      "& .MuiSvgIcon-root": {
-                        fontSize: 28,
-                      },
-                    }}
-                    size="medium"
-                  />
-                }
-                label={option.value}
-              />
+              <SingleOption option={option} />
             ))}
           </RadioGroup>
         </FormControl>
