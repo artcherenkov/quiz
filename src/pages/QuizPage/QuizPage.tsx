@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import * as Styled from "./QuizPage.styled";
 
 import FormControl from "@mui/material/FormControl";
@@ -9,11 +9,13 @@ import {
   setActiveQuestion,
   selectAnswers,
   selectNextQuestionIdx,
+  selectQuestions,
 } from "../../store/slices/quiz";
 import { useParams, useHistory } from "react-router";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { setAnswer as setAnswerAction } from "../../store/slices/quiz";
 import SingleOption from "./components/SingleOption/SingleOption";
+import { WarningButton } from "../../components/ui/Button.styled";
 
 const QuizPage = () => {
   const dispatch = useAppDispatch();
@@ -22,6 +24,7 @@ const QuizPage = () => {
 
   const activeQuestion = useAppSelector(selectQuestionById(id));
   const answers = useAppSelector(selectAnswers);
+  const questions = useAppSelector(selectQuestions);
   const nextQuestionIdx = useAppSelector(selectNextQuestionIdx);
 
   const [answer, setAnswer] = useState("");
@@ -40,6 +43,10 @@ const QuizPage = () => {
     dispatch(setActiveQuestion(id));
     setAnswer(getGiverAnswer);
   }, [id]);
+  const isLastQuestion = useMemo(
+    () => answers.length === questions.length - 1,
+    [answers]
+  );
 
   if (!activeQuestion) return null;
 
@@ -53,6 +60,9 @@ const QuizPage = () => {
     const isCorrect = activeQuestion.correctAnswerId === givenAnswer.id;
     const questionId = activeQuestion.id;
     dispatch(setAnswerAction({ questionId, answer: givenAnswer, isCorrect }));
+    if (isLastQuestion) {
+      return history.push(`/results`);
+    }
     if (nextQuestionIdx === undefined) {
       return history.push(`/questions`);
     }
@@ -78,9 +88,15 @@ const QuizPage = () => {
         </FormControl>
       </Styled.Content>
       <Styled.ControlsContainer>
-        <Styled.Submit onClick={onSubmit} variant="contained">
-          Ответить
-        </Styled.Submit>
+        {isLastQuestion ? (
+          <WarningButton onClick={onSubmit} variant="contained">
+            Завершить викторину
+          </WarningButton>
+        ) : (
+          <Styled.Submit onClick={onSubmit} variant="contained">
+            Ответить
+          </Styled.Submit>
+        )}
       </Styled.ControlsContainer>
     </Styled.Root>
   );

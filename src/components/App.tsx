@@ -2,6 +2,7 @@ import { Switch, Route } from "react-router-dom";
 import MainPage from "../pages/MainPage/MainPage";
 import QuizPage from "../pages/QuizPage/QuizPage";
 import QuestionsPage from "../pages/QuestionsPage/QuestionsPage";
+import ResultsPage from "../pages/ResultsPage/ResultsPage";
 
 const App = () => (
   <Switch>
@@ -13,6 +14,9 @@ const App = () => (
     </Route>
     <Route exact path="/questions">
       <QuestionsPage />
+    </Route>
+    <Route exact path="/results">
+      <ResultsPage />
     </Route>
   </Switch>
 );

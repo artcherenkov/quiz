@@ -1,11 +1,9 @@
 import styled from "styled-components";
-import Button from "@mui/material/Button";
+import { DefaultButton } from "../../components/ui/Button.styled";
 
 export const Root = styled.section`
   height: 100%;
   padding: 30px 0;
-  //display: grid;
-  //grid-template-rows: auto 1fr auto;
 `;
 
 export const ControlsContainer = styled.div`
@@ -20,7 +18,7 @@ export const Content = styled.div`
   margin-bottom: 40px;
 `;
 
-export const Submit = styled(Button)`
+export const Submit = styled(DefaultButton)`
   width: 290px;
 
   && {

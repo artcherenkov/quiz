@@ -1,7 +1,15 @@
-import * as Styled from "./MainPage.styled";
 import { useHistory } from "react-router";
+import { styled } from "@mui/material";
+
 import { useAppSelector } from "../../store/hooks";
 import { selectQuestions } from "../../store/slices/quiz";
+import * as Styled from "./MainPage.styled";
+import { DefaultButton } from "../../components/ui/Button.styled";
+
+const SubmitButton = styled(DefaultButton)`
+  padding: 12px 0;
+  width: 280px;
+`;
 
 const MainPage = () => {
   const history = useHistory();
@@ -21,9 +29,9 @@ const MainPage = () => {
       </Styled.Content>
       <Styled.ImageContainer />
       <Styled.SubmitContainer>
-        <Styled.Submit onClick={onSubmit} variant="contained" size="large">
+        <SubmitButton onClick={onSubmit} size="large">
           Начать викторину
-        </Styled.Submit>
+        </SubmitButton>
       </Styled.SubmitContainer>
     </Styled.Root>
   );
