@@ -9,6 +9,8 @@ interface IQuizState {
   currentQuestionId: string | undefined;
   currentQuestionIdx: number;
   answers: TAnswer[];
+  /** закончил ли пользователь викторину */
+  hasQuizFinished: boolean;
 }
 
 const initialState: IQuizState = {
@@ -16,6 +18,7 @@ const initialState: IQuizState = {
   currentQuestionId: undefined,
   currentQuestionIdx: -1,
   answers: [],
+  hasQuizFinished: false,
 };
 
 const getNewInitialState = (): IQuizState => ({
@@ -86,6 +89,9 @@ export const selectNextQuestionIdx = (state: RootState) => {
   }
 
   return nextQuestion.id;
+};
+export const selectHasQuizFinished = (state: RootState) => {
+  return state.quiz.hasQuizFinished;
 };
 
 const { actions, reducer } = quiz;

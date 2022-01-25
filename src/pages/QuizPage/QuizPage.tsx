@@ -9,7 +9,6 @@ import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import {
   selectQuestionById,
   setActiveQuestion,
-  selectQuestions,
   selectAnswers,
   selectNextQuestionIdx,
 } from "../../store/slices/quiz";

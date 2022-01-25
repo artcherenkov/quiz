@@ -9,6 +9,7 @@ import {
   selectActiveQuestion,
   selectAnswers,
   resetQuiz,
+  selectHasQuizFinished,
 } from "../../store/slices/quiz";
 
 const QuestionsPage = () => {
@@ -17,6 +18,7 @@ const QuestionsPage = () => {
   const questions = useAppSelector(selectQuestions);
   const answers = useAppSelector(selectAnswers);
   const activeQuestion = useAppSelector(selectActiveQuestion);
+  const hasQuizFinished = useAppSelector(selectHasQuizFinished);
 
   if (activeQuestion.idx === -1) {
     return <Redirect to="/" />;
@@ -26,10 +28,13 @@ const QuestionsPage = () => {
     return null;
   }
 
-  const getQuestionState = (questionId: string) => {
+  const getQuestionState = (questionId: string, hasQuizFinished: boolean) => {
     const answer = answers.find((ans) => ans.questionId === questionId);
     if (!answer) {
-      return 0;
+      return "not answered";
+    }
+    if (!hasQuizFinished) {
+      return "default";
     }
     if (answer.isCorrect) {
       return "success";
@@ -60,7 +65,7 @@ const QuestionsPage = () => {
       )}
       <Styled.QuestionsList>
         {questions.map((q, idx) => {
-          const status = getQuestionState(q.id);
+          const status = getQuestionState(q.id, hasQuizFinished);
           return (
             <li key={q.id}>
               <Styled.QuestionContainer

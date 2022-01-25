@@ -2,9 +2,10 @@ import { Link as RouterLink } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 export const Root = styled.section`
-  padding-top: 30px;
+  padding: 30px 0;
   background-color: #a3d9ff;
   height: 100%;
+  border-radius: 10px;
 `;
 
 export const QuestionsList = styled.ul`
@@ -18,7 +19,7 @@ export const QuestionsList = styled.ul`
   grid-gap: 20px;
 `;
 export const QuestionContainer = styled(RouterLink)<{
-  status?: "fail" | "success";
+  status?: "fail" | "success" | "not answered" | "default";
 }>`
   height: 80px;
   background-color: #cae9ff;
@@ -45,6 +46,10 @@ export const QuestionContainer = styled(RouterLink)<{
       case "success":
         return css`
           background-color: #d6f5e1;
+        `;
+      case "not answered":
+        return css`
+          background-color: #e5f4ff;
         `;
     }
   }}
