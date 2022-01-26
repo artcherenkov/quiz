@@ -33,7 +33,7 @@ export const QuestionTitle = styled.h1`
   font-size: 24px;
   line-height: 130%;
   color: #2d2d2d;
-  margin-bottom: 16px;
+  margin-bottom: 32px;
 `;
 
 export const ImageList = styled.ul`
@@ -48,6 +48,7 @@ export const ImageList = styled.ul`
 export const ImageListItem = styled.li<{
   selected?: boolean;
   disabled?: boolean;
+  showAnswer?: boolean;
 }>`
   margin: 5px;
   overflow: hidden;
@@ -97,6 +98,12 @@ export const ImageListItem = styled.li<{
       &:active {
         transform: none;
       }
+    `}
+
+  ${(props) =>
+    props.showAnswer &&
+    css`
+      outline: 6px solid #96e6b3;
     `}
 `;
 

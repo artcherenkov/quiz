@@ -95,6 +95,10 @@ const QuizPage = () => {
                   key={option.value}
                   option={option}
                   disabled={hasQuizFinished}
+                  showAnswer={
+                    option.id === activeQuestion.correctAnswerId &&
+                    hasQuizFinished
+                  }
                 />
               ))}
             </RadioGroup>
@@ -108,6 +112,10 @@ const QuizPage = () => {
                 onClick={() => !hasQuizFinished && onImageSelect(option.value)}
                 selected={option.value === answer}
                 disabled={hasQuizFinished}
+                showAnswer={
+                  option.id === activeQuestion.correctAnswerId &&
+                  hasQuizFinished
+                }
               >
                 <Styled.Image src={option.value} alt="img" loading="lazy" />
               </Styled.ImageListItem>
