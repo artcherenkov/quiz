@@ -86,23 +86,22 @@ const QuizPage = () => {
               onChange={onChange}
             >
               {activeQuestion.options.map((option) => (
-                <SingleOption option={option} />
+                <SingleOption key={option.value} option={option} />
               ))}
             </RadioGroup>
           </FormControl>
         )}
         {activeQuestion.type === "image" && (
           <Styled.ImageList>
-            {activeQuestion.options.map((option) => {
-              return (
-                <Styled.ImageListItem
-                  onClick={() => onImageSelect(option.value)}
-                  selected={option.value === answer}
-                >
-                  <Styled.Image src={option.value} alt="img" loading="lazy" />
-                </Styled.ImageListItem>
-              );
-            })}
+            {activeQuestion.options.map((option) => (
+              <Styled.ImageListItem
+                key={option.value}
+                onClick={() => onImageSelect(option.value)}
+                selected={option.value === answer}
+              >
+                <Styled.Image src={option.value} alt="img" loading="lazy" />
+              </Styled.ImageListItem>
+            ))}
           </Styled.ImageList>
         )}
       </Styled.Content>

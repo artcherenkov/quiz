@@ -13,7 +13,7 @@ import "./vendor/normalize.css";
 import "./vendor/fonts.css";
 import "./index.css";
 
-store.dispatch(setQuestions(shuffle(questions.slice(0, 5))));
+store.dispatch(setQuestions(shuffle(questions)));
 
 ReactDOM.render(
   <React.StrictMode>

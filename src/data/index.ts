@@ -12,6 +12,14 @@ import sights1 from "../images/quiz/sights-1.png";
 import sights2 from "../images/quiz/sights-2.png";
 import sights3 from "../images/quiz/sights-3.png";
 
+const getError = (questionTitle: string) => {
+  return (
+    "В вариантах ответа к вопросу с заголовком " +
+    questionTitle +
+    " не найден правильный ответ."
+  );
+};
+
 export const RAW_QUESTIONS: TRawQuestion[] = [
   {
     type: "single",
@@ -141,17 +149,7 @@ export const RAW_QUESTIONS: TRawQuestion[] = [
   },
 ];
 
-const getError = (questionTitle: string) => {
-  return (
-    "В вариантах ответа к вопросу с заголовком " +
-    questionTitle +
-    " не найден правильный ответ."
-  );
-};
-
-export const transformQuestions = (
-  rawQuestions: TRawQuestion[]
-): TQuestion[] => {
+const transformQuestions = (rawQuestions: TRawQuestion[]): TQuestion[] => {
   let correctAnswerId: string;
 
   return rawQuestions.map((rawQuestion, questionIdx) => {
