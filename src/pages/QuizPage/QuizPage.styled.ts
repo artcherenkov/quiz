@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { DefaultButton } from "../../components/ui/Button.styled";
 
 export const Root = styled.section`
@@ -23,6 +23,7 @@ export const Submit = styled(DefaultButton)`
 
   && {
     padding: 10px 0;
+    margin-bottom: 48px;
   }
 `;
 
@@ -33,4 +34,46 @@ export const QuestionTitle = styled.h1`
   line-height: 130%;
   color: #2d2d2d;
   margin-bottom: 32px;
+`;
+
+export const ImageList = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const ImageListItem = styled.li<{ selected?: boolean }>`
+  margin: 5px;
+  overflow: hidden;
+  width: 80%;
+  height: auto;
+  display: block;
+  border-radius: 15px;
+  border: 4px solid #82c4ed;
+  box-shadow: 0 0 5px #82c4ed;
+  transition: box-shadow 200ms ease-in, transform 100ms ease;
+
+  &:not(:last-child) {
+    margin-bottom: 16px;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  ${(props) =>
+    props.selected &&
+    css`
+      border: 4px solid #009dff;
+      box-shadow: 0 0 10px #009dff;
+    `}
+`;
+
+export const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  display: block;
 `;

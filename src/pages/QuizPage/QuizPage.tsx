@@ -53,6 +53,9 @@ const QuizPage = () => {
   const onChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setAnswer(evt.target.value);
   };
+  const onImageSelect = (optionValue: string) => {
+    setAnswer(optionValue);
+  };
   const onSubmit = () => {
     const givenAnswer = activeQuestion.options.find(
       (opt) => opt.value === answer
@@ -74,18 +77,34 @@ const QuizPage = () => {
       <ProgressBar />
       <Styled.Content>
         <Styled.QuestionTitle>{activeQuestion.title}</Styled.QuestionTitle>
-        <FormControl component="fieldset">
-          <RadioGroup
-            aria-label={activeQuestion.title}
-            name="options"
-            value={answer}
-            onChange={onChange}
-          >
-            {activeQuestion.options.map((option) => (
-              <SingleOption option={option} />
-            ))}
-          </RadioGroup>
-        </FormControl>
+        {activeQuestion.type === "single" && (
+          <FormControl component="fieldset">
+            <RadioGroup
+              aria-label={activeQuestion.title}
+              name="options"
+              value={answer}
+              onChange={onChange}
+            >
+              {activeQuestion.options.map((option) => (
+                <SingleOption option={option} />
+              ))}
+            </RadioGroup>
+          </FormControl>
+        )}
+        {activeQuestion.type === "image" && (
+          <Styled.ImageList>
+            {activeQuestion.options.map((option) => {
+              return (
+                <Styled.ImageListItem
+                  onClick={() => onImageSelect(option.value)}
+                  selected={option.value === answer}
+                >
+                  <Styled.Image src={option.value} alt="img" loading="lazy" />
+                </Styled.ImageListItem>
+              );
+            })}
+          </Styled.ImageList>
+        )}
       </Styled.Content>
       <Styled.ControlsContainer>
         {isLastQuestion ? (

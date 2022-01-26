@@ -14,4 +14,8 @@ export const WarningButton = styled(Button)`
   &:hover {
     background-color: #ffa600;
   }
+  && {
+    margin-bottom: 48px;
+    padding: 10px 16px;
+  }
 `;

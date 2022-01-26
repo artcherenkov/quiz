@@ -10,6 +10,7 @@ export const Title = styled.h2`
   text-transform: uppercase;
   margin: 36px auto 0;
   text-align: center;
+  max-width: 280px;
 `;
 export const Numbers = styled.p<{ color: string }>`
   margin: 16px auto 0;
