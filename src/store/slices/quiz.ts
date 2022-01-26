@@ -46,12 +46,17 @@ export const quiz = createSlice({
       const foundAnswerIndex = state.answers.findIndex(
         (answer) => answer.questionId === action.payload.questionId
       );
+      const answers = state.answers.slice();
       if (foundAnswerIndex !== -1) {
-        state.answers[foundAnswerIndex] = action.payload;
+        answers[foundAnswerIndex] = action.payload;
         return;
       }
 
-      state.answers = [...state.answers, action.payload];
+      answers.push(action.payload);
+      state.answers = answers;
+      if (answers.length === state.questions.length) {
+        state.hasQuizFinished = true;
+      }
     },
     resetQuiz: () => {
       return getNewInitialState();

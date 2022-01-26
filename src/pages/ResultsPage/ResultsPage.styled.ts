@@ -38,3 +38,11 @@ export const Text = styled.p`
   border-radius: 15px;
   max-width: 300px;
 `;
+
+export const Buttons = styled.div`
+  margin-top: 32px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

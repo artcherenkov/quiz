@@ -5,12 +5,14 @@ import { TQuestionOption } from "../../../../types";
 
 interface ISingleOption {
   option: TQuestionOption;
+  disabled?: boolean;
 }
 
-const SingleOption = ({ option }: ISingleOption) => {
+const SingleOption = ({ option, disabled = false }: ISingleOption) => {
   return (
     <FormControlLabel
       key={option.id}
+      disabled={disabled}
       value={option.value}
       sx={{
         "& .MuiFormControlLabel-label": {
@@ -20,6 +22,7 @@ const SingleOption = ({ option }: ISingleOption) => {
       }}
       control={
         <Radio
+          disabled={disabled}
           sx={{
             "& .MuiSvgIcon-root": {
               fontSize: 28,

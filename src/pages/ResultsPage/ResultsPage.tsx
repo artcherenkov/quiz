@@ -1,7 +1,10 @@
 import { useMemo } from "react";
 import * as Styled from "./ResultsPage.styled";
-import { useAppSelector } from "../../store/hooks";
-import { selectAnswers } from "../../store/slices/quiz";
+import { useAppSelector, useAppDispatch } from "../../store/hooks";
+import { selectAnswers, resetQuiz } from "../../store/slices/quiz";
+import { DefaultButton } from "../../components/ui/Button.styled";
+import Button from "@mui/material/Button";
+import { useHistory } from "react-router";
 
 const Result = {
   EXCELLENT: {
@@ -34,6 +37,8 @@ const getResult = (percentage: number) => {
 };
 
 const ResultsPage = () => {
+  const history = useHistory();
+  const dispatch = useAppDispatch();
   const answers = useAppSelector(selectAnswers);
   const correctAnswersCount = useMemo(
     () => answers.filter((answer) => answer.isCorrect).length,
@@ -46,6 +51,15 @@ const ResultsPage = () => {
 
   const result = getResult(correctPercentage);
 
+  const onToQuestionsClick = () => {
+    history.replace("/questions");
+  };
+
+  const onRestartClick = () => {
+    dispatch(resetQuiz());
+    history.replace("/");
+  };
+
   return (
     <>
       <Styled.Emoji>{result.emoji}</Styled.Emoji>
@@ -56,6 +70,18 @@ const ResultsPage = () => {
         </span>
       </Styled.Numbers>
       <Styled.Text>{result.text}</Styled.Text>
+      <Styled.Buttons>
+        <DefaultButton onClick={onToQuestionsClick}>
+          Посмотреть вопросы
+        </DefaultButton>
+        <Button
+          onClick={onRestartClick}
+          variant="outlined"
+          style={{ marginTop: 16 }}
+        >
+          Начать викторину сначала
+        </Button>
+      </Styled.Buttons>
     </>
   );
 };

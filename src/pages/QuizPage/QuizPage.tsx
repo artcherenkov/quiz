@@ -10,6 +10,7 @@ import {
   selectAnswers,
   selectNextQuestionIdx,
   selectQuestions,
+  selectHasQuizFinished,
 } from "../../store/slices/quiz";
 import { useParams, useHistory } from "react-router";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
@@ -26,6 +27,7 @@ const QuizPage = () => {
   const answers = useAppSelector(selectAnswers);
   const questions = useAppSelector(selectQuestions);
   const nextQuestionIdx = useAppSelector(selectNextQuestionIdx);
+  const hasQuizFinished = useAppSelector(selectHasQuizFinished);
 
   const [answer, setAnswer] = useState("");
 
@@ -86,7 +88,11 @@ const QuizPage = () => {
               onChange={onChange}
             >
               {activeQuestion.options.map((option) => (
-                <SingleOption key={option.value} option={option} />
+                <SingleOption
+                  key={option.value}
+                  option={option}
+                  disabled={hasQuizFinished}
+                />
               ))}
             </RadioGroup>
           </FormControl>
@@ -96,8 +102,9 @@ const QuizPage = () => {
             {activeQuestion.options.map((option) => (
               <Styled.ImageListItem
                 key={option.value}
-                onClick={() => onImageSelect(option.value)}
+                onClick={() => !hasQuizFinished && onImageSelect(option.value)}
                 selected={option.value === answer}
+                disabled={hasQuizFinished}
               >
                 <Styled.Image src={option.value} alt="img" loading="lazy" />
               </Styled.ImageListItem>
@@ -107,11 +114,19 @@ const QuizPage = () => {
       </Styled.Content>
       <Styled.ControlsContainer>
         {isLastQuestion ? (
-          <WarningButton onClick={onSubmit} variant="contained">
+          <WarningButton
+            onClick={onSubmit}
+            variant="contained"
+            disabled={hasQuizFinished}
+          >
             Завершить викторину
           </WarningButton>
         ) : (
-          <Styled.Submit onClick={onSubmit} variant="contained">
+          <Styled.Submit
+            onClick={onSubmit}
+            variant="contained"
+            disabled={hasQuizFinished}
+          >
             Ответить
           </Styled.Submit>
         )}

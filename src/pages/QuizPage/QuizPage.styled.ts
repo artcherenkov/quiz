@@ -45,7 +45,10 @@ export const ImageList = styled.ul`
   align-items: center;
 `;
 
-export const ImageListItem = styled.li<{ selected?: boolean }>`
+export const ImageListItem = styled.li<{
+  selected?: boolean;
+  disabled?: boolean;
+}>`
   margin: 5px;
   overflow: hidden;
   width: 80%;
@@ -57,7 +60,7 @@ export const ImageListItem = styled.li<{ selected?: boolean }>`
   transition: box-shadow 200ms ease-in, transform 100ms ease;
 
   &:not(:last-child) {
-    margin-bottom: 16px;
+    margin-bottom: 32px;
   }
 
   &:active {
@@ -67,8 +70,33 @@ export const ImageListItem = styled.li<{ selected?: boolean }>`
   ${(props) =>
     props.selected &&
     css`
-      border: 4px solid #009dff;
-      box-shadow: 0 0 10px #009dff;
+      transform: scale(1.1);
+      border: 6px solid #008ee5;
+      box-shadow: 0 0 15px #008ee5;
+      &:active {
+        transform: none;
+      }
+    `}
+
+  ${(props) =>
+    props.disabled &&
+    css`
+      border: 4px solid #a2bdcd;
+      box-shadow: 0 0 15px #a2bdcd;
+      &:active {
+        transform: none;
+      }
+    `}
+
+  ${(props) =>
+    props.disabled &&
+    props.selected &&
+    css`
+      border: 6px solid #507b95;
+      box-shadow: 0 0 15px #507b95;
+      &:active {
+        transform: none;
+      }
     `}
 `;
 
