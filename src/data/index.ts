@@ -45,6 +45,7 @@ export const RAW_QUESTIONS: TRawQuestion[] = [
     title: "В каком океане находятся Новосибирские острова?",
     options: ["Тихом", "Северном Ледовитом", "Атлантическом"],
     correctAnswer: "Северном Ледовитом",
+    help: "это принадлежащий России архипелаг, состоящий из 3-х групп островов: Ляховские острова, острова Анжу и острова Де-Лонга",
   },
   {
     type: "single",
@@ -80,6 +81,7 @@ export const RAW_QUESTIONS: TRawQuestion[] = [
     title: "Кому посвящена единственная в России станция метро-музей?",
     options: ["В.П. Чкалову", "А.И. Покрышкину", "А.П. Маресьеву"],
     correctAnswer: "А.И. Покрышкину",
+    help: "станция названа в честь новосибирца, участника Великой Отечественной войны 1941-1945 гг., прославленного летчика, трижды Героя Советского Союза",
   },
   {
     type: "single",
@@ -147,13 +149,19 @@ export const RAW_QUESTIONS: TRawQuestion[] = [
     options: [sights1, sights2, sights3],
     correctAnswer: sights1,
   },
+  {
+    type: "single",
+    title: "Какому животному посвящён памятник в новосибирском Академгородке?",
+    options: ["Мамонту", "Лабораторной мыши", "Комару"],
+    correctAnswer: "Лабораторной мыши",
+  },
 ];
 
 const transformQuestions = (rawQuestions: TRawQuestion[]): TQuestion[] => {
   let correctAnswerId: string;
 
   return rawQuestions.map((rawQuestion, questionIdx) => {
-    const { type, title, options, correctAnswer } = rawQuestion;
+    const { type, title, options, correctAnswer, help } = rawQuestion;
 
     const areOptionsIncludeCorrect = options.includes(correctAnswer);
     if (!areOptionsIncludeCorrect) {
@@ -181,6 +189,7 @@ const transformQuestions = (rawQuestions: TRawQuestion[]): TQuestion[] => {
       title,
       options: optionsWithId,
       correctAnswerId,
+      help,
     };
   });
 };

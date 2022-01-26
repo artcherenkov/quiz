@@ -33,7 +33,7 @@ export const QuestionTitle = styled.h1`
   font-size: 24px;
   line-height: 130%;
   color: #2d2d2d;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
 `;
 
 export const ImageList = styled.ul`
@@ -104,4 +104,10 @@ export const Image = styled.img`
   width: 100%;
   height: 100%;
   display: block;
+`;
+
+export const Help = styled.p`
+  font-size: 14px;
+  color: #6b6b6b;
+  margin-bottom: 32px;
 `;

@@ -79,6 +79,9 @@ const QuizPage = () => {
       <ProgressBar />
       <Styled.Content>
         <Styled.QuestionTitle>{activeQuestion.title}</Styled.QuestionTitle>
+        {activeQuestion.help && (
+          <Styled.Help>Справка: {activeQuestion.help}</Styled.Help>
+        )}
         {activeQuestion.type === "single" && (
           <FormControl component="fieldset">
             <RadioGroup
